@@ -1,12 +1,13 @@
 import curses
 import time
 
-import loadsentences
+import loaddata
 
 
-def display_result(window, wpm):
+def display_result(window, wpm, best):
     window.clear()
     window.addstr(0, 0, f"WPM: {wpm}")
+    window.addstr(1, 0, f"BEST: {best}")
     window.refresh()
     while True:
         if window.getkey() == '\t':
@@ -38,7 +39,7 @@ def display(window, target, current, wpm=0):
 
 
 def WPM_test(window):
-    target_text = loadsentences.rand_sentence()
+    target_text = loaddata.rand_sentence()
     current_text = []
     wpm = 0
     start_time = time.time()
@@ -63,4 +64,6 @@ def WPM_test(window):
         else:
             current_text.append(char)
 
-    display_result(window, wpm)
+    if loaddata.get_best() < wpm:
+        loaddata.set_best(wpm)
+    display_result(window, wpm, loaddata.get_best())
