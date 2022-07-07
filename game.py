@@ -2,12 +2,15 @@ import curses
 import time
 
 import loaddata
+import firestore
 
 
 def display_result(window, wpm, best):
     window.clear()
     window.addstr(0, 0, f"WPM: {wpm}")
     window.addstr(1, 0, f"BEST: {best}")
+    for i, data in enumerate(firestore.get_data()):
+        window.addstr(i+3, 0, f"{i+1}. {data['username']} : {data['wpm']}")
     window.refresh()
     while True:
         if window.getkey() == '\t':
@@ -66,4 +69,5 @@ def WPM_test(window):
 
     if loaddata.get_best() < wpm:
         loaddata.set_best(wpm)
+        firestore.set_data(wpm)
     display_result(window, wpm, loaddata.get_best())
