@@ -2,4 +2,4 @@
 
 ![preview](preview.gif)
 
-## [Download](https://github.com/Daniru2007/typing-app/raw/main/output/typing-app.rar)
+## [Download](https://github.com/Daniru2007/typing-app/blob/main/typing-app.zip?raw=true)
